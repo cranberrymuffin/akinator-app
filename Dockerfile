@@ -9,5 +9,5 @@ RUN npm ci
 # copy rest and build
 COPY . /code/.
 
-RUN npm build
+RUN npm run build
 CMD ["node", "server.js"]
