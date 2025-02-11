@@ -4,8 +4,8 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
-    "dev": "nodemon ./src/server.js",
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -24,8 +24,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "react-scripts": "^4.0.0",
-    "typescript": "^4.9.5"
+    "react-scripts": "^4.0.0"
   },
   "browserslist": ">0.2%, not dead, not op_mini all"
 }

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import { askGemini } from "./gemini.js";
+import { askGemini } from "./src/gemini.js";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve the React static files
-const buildPath = path.join(__dirname, "..", "build"); // Adjust if necessary
+const buildPath = path.join(__dirname, "build"); // Adjust if necessary
 app.use(express.static(buildPath));
 
 app.post("/ask", async (req, res) => {
