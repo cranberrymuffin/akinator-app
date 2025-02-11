@@ -1,22 +1,23 @@
 import express from "express";
-import cors from "cors"; // Allow cross-origin requests
-import { askGemini } from "./gemini.js"; // Import the function for communicating with Gemini
+import cors from "cors";
+import { askGemini } from "./gemini.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 
-let previousQuestions = []; // Store previous questions and answers
+let previousQuestions = []; // Store past questions and answers
 
-// Endpoint to receive user answers and return the next question
 app.post("/ask", async (req, res) => {
-  const { answer } = req.body; // Get user's answer (Yes/No/IDK)
+  const { answer } = req.body;
 
-  // Create the prompt for the AI model
+  // Construct the AI prompt with history
   const prompt = `
     You are playing a game similar to Akinator. I will provide a history of past questions and answers.
     Your goal is to guess a character based on the user's responses. If you are confident, make a guess.
     Otherwise, ask a new, relevant question.
+
+    Preface guess with "G:" and answer with "A:"
 
     Past questions and answers:
     ${previousQuestions.join("\n")}
@@ -27,24 +28,22 @@ app.post("/ask", async (req, res) => {
   `;
 
   try {
-    // Call the Gemini API to get a response
-    const response = await askGemini(prompt);
+    // Query the Gemini model
+    const aiResponse = await askGemini(prompt);
 
-    // Store the new question and answer
+    // Store the new question and answer properly
     previousQuestions.push(
-      `Q: ${
-        previousQuestions[previousQuestions.length - 1] || "First Question"
-      }\nA: ${answer}`
+      `Q: ${previousQuestions.at(-1) || "First Question"}\nA: ${answer}`
     );
+    previousQuestions.push(`Q: ${aiResponse}`); // Store the AI-generated question
 
-    // Return the response (question or guess) to the frontend
-    res.json({ question: response() });
+    // Send the AI's next question/guess to the frontend
+    res.json({ question: aiResponse });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error interacting with Gemini.");
+    console.error("Error:", err);
+    res.status(500).json({ error: "Error interacting with Gemini." });
   }
 });
 
-// Start the server
 const port = 5050;
-app.listen(port, () => {});
+app.listen(port, () => console.log(`Server running on port ${port}`));
