@@ -60,5 +60,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
-const port = 5050;
+const port = 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
