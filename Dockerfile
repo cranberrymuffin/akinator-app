@@ -9,6 +9,6 @@ RUN npm ci
 # copy rest and build
 COPY . /code/.
 
-RUN export NODE_OPTIONS=--openssl-legacy-provider
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
 CMD ["node", "server.js"]
