@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { askGemini } from "./gemini.js";
 
 const app = express();
@@ -7,6 +9,14 @@ app.use(express.json());
 app.use(cors());
 
 let previousQuestions = []; // Store past questions and answers
+
+// Fix __dirname in ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve the React static files
+const buildPath = path.join(__dirname, "..", "build"); // Adjust if necessary
+app.use(express.static(buildPath));
 
 app.post("/ask", async (req, res) => {
   const { answer } = req.body;
@@ -43,6 +53,11 @@ app.post("/ask", async (req, res) => {
     console.error("Error:", err);
     res.status(500).json({ error: "Error interacting with Gemini." });
   }
+});
+
+// Serve React's index.html for all unknown routes (SPA support)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 const port = 5050;
