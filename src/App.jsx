@@ -18,7 +18,7 @@ const App = () => {
     }
 
     // Send the answer to the backend API and get the AI's response
-    const response = await fetch("http://localhost:5050/ask", {
+    const response = await fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ answer }),
