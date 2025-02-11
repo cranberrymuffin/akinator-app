@@ -1,0 +1,34 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+
+# Build artifacts
+/dist
+/build
+
+# Test coverage
+coverage/
+
+# IDE or editor directories and files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Optional: If using a package manager other than npm (like Yarn)
+yarn.lock
+
+# Optional: If using TypeScript (exclude compiled files)
+*.tsbuildinfo

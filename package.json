@@ -1,0 +1,29 @@
+{
+  "name": "akinator-app",
+  "version": "1.0.0",
+"type": "module",
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "client": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install-backend": "npm install express @google/generative-ai dotenv",
+    "install-frontend": "npm install react react-dom react-scripts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^3.1.9",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "^4.0.0",
+    "typescript": "^4.9.5"
+  },
+  "browserslist": ">0.2%, not dead, not op_mini all"
+}
