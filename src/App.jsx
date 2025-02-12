@@ -3,21 +3,18 @@ import { useState } from "react";
 const App = () => {
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("Are you thinking of someone?");
-  const [isStarted, setIsStarted] = useState(false); // Track if the game has started
+  const [isStarted, setIsStarted] = useState(false);
 
-  // Function to send the answer to the backend and get a new question or guess
   const handleSubmit = async () => {
     if (!isStarted) {
       if (answer === "yes") {
-        setIsStarted(true); // Start the game after the first "Yes" answer
-        // Proceed with submitting the answer and fetching the next question
+        setIsStarted(true);
       } else {
-        // If the user doesn't answer "Yes", we prevent the game from continuing
         alert("Please answer 'Yes' to start the game.");
+        return;
       }
     }
 
-    // Send the answer to the backend API and get the AI's response
     const response = await fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -26,13 +23,18 @@ const App = () => {
 
     if (response.ok) {
       const data = await response.json();
-
-      setQuestion(data.question); // Set the next question or guess
+      setQuestion(data.question);
     } else {
       console.error("Error fetching question");
     }
 
-    setAnswer(""); // Clear the answer after submission
+    setAnswer("");
+  };
+
+  const handleReset = async () => {
+    await fetch("/reset", { method: "POST" });
+    setQuestion("Are you thinking of someone?");
+    setIsStarted(false);
   };
 
   return (
@@ -68,6 +70,7 @@ const App = () => {
         </label>
       </div>
       <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };
