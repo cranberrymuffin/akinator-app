@@ -38,39 +38,50 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h3>{question}</h3>
-      <div>
-        <label>
-          <input
-            type="radio"
-            value="yes"
-            checked={answer === "yes"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          Yes
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="no"
-            checked={answer === "no"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          No
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="idk"
-            checked={answer === "idk"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          I don't know
-        </label>
+    <div className="centered-container">
+      <div className="game-box">
+        {/* Question */}
+        <div className="question">
+          <h3>{question}</h3>
+        </div>
+
+        {/* Radio options */}
+        <div className="options">
+          <label>
+            <input
+              type="radio"
+              value="yes"
+              checked={answer === "yes"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="no"
+              checked={answer === "no"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            No
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="idk"
+              checked={answer === "idk"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            I don't know
+          </label>
+        </div>
+
+        {/* Buttons */}
+        <div className="buttons">
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleReset}>Reset</button>
+        </div>
       </div>
-      <button onClick={handleSubmit}>Submit</button>
-      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };
