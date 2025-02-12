@@ -21,7 +21,7 @@ app.post("/ask", async (req, res) => {
     res.json({ question: aiResponse });
   } catch (err) {
     console.error("Error:", err);
-    res.status(500).json({ error: "Error interacting with Gemini." });
+    res.status(500).json({ error: err });
   }
 });
 
