@@ -28,12 +28,17 @@ Let's start! First, ask a broad question to begin the game.
 
 // Start chat session with initial context
 let chat = model.startChat({
-  history: [{ role: "user", parts: [{ text: initialPrompt }] }], // Preserve context
+  history: [
+    { role: "user", parts: [{ text: initialPrompt }] },
+    { role: "model", parts: [{ text: "Q: Are you thinking of someone?" }] },
+  ], // Preserve context
 });
 
 async function askGemini(userMessage) {
   try {
     const result = await chat.sendMessage(userMessage);
+    const history = chat.getHistory();
+    history.then((result) => console.log(JSON.stringify(result)));
     return (
       result.response?.text().trim() ?? "Sorry, I could not generate an answer."
     );
