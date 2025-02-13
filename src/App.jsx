@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [sessionId, setSessionId] = useState("");
@@ -38,6 +39,7 @@ const App = () => {
 
   return (
     <div className="centered-container">
+      This game is a work in progress...
       <div className="game-box">
         {/* Question */}
         <div className="question">
