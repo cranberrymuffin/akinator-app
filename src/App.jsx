@@ -33,6 +33,7 @@ const App = () => {
       setQuestion(data.answer);
       setThoughts(data.thoughts);
     } else {
+      console.log(response);
       console.error("Error fetching question");
     }
 
