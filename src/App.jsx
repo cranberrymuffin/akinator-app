@@ -2,19 +2,9 @@ import { useState } from "react";
 
 const App = () => {
   const [answer, setAnswer] = useState("");
-  const [question, setQuestion] = useState("Are you thinking of someone?");
-  const [isStarted, setIsStarted] = useState(false);
+  const [question, setQuestion] = useState("Q: Is the character human?");
 
   const handleSubmit = async () => {
-    if (!isStarted) {
-      if (answer === "yes") {
-        setIsStarted(true);
-      } else {
-        alert("Please answer 'Yes' to start the game.");
-        return;
-      }
-    }
-
     const response = await fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,7 +24,6 @@ const App = () => {
   const handleReset = async () => {
     await fetch("/reset", { method: "POST" });
     setQuestion("Are you thinking of someone?");
-    setIsStarted(false);
   };
 
   return (
