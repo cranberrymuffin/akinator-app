@@ -9,12 +9,19 @@ if (!apiKey) {
 }
 
 const client = new GoogleGenerativeAI(apiKey);
-const model = client.getGenerativeModel({ model: "gemini-pro" });
-
+const model = client.getGenerativeModel({
+  model: "gemini-pro",
+  generationConfig: {
+    temperature: 1.5, // Higher diversity
+    maxOutputTokens: 100, // Keeps responses concise
+    topP: 0.8, // More randomness
+    topK: 50, // Selects from a wider set of possibilities
+  },
+});
 // Initial system message to guide Gemini's behavior
 const initialPrompt = `
 You are playing a game similar to Akinator.
-Your goal is to guess a character based on the user's responses.
+Your goal is to guess a character based on the user's responses. The character can be real or fictional, human or non-human. The character may be famous or the user may know the character personally.
 You will ask a series of Yes/No questions to narrow down the possibilities.
 
 Rules:
@@ -40,10 +47,11 @@ let chat = model.startChat({
       role: "model",
       parts: [
         {
-          text: `I am asked to play a guessing game. I don't know anything about the character being guessed just yet. To be able to distinguish different characters, I might consider whether they are human or not.
-<answer>
-Q: Is the character human?
-</answer>`,
+          text: JSON.stringify({
+            thoughts:
+              "I am asked to play a guessing game. I don't know anything about the character being guessed just yet. To be able to distinguish different characters, I might consider whether they are human or not.",
+            answer: "Q: Is the character human?",
+          }),
         },
       ],
     },

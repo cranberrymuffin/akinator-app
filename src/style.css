@@ -32,6 +32,10 @@ body,
   margin-bottom: 20px;
 }
 
+.thoughts {
+  margin-bottom: 20px;
+}
+
 .options {
   display: flex;
   flex-direction: column;

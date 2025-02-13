@@ -18,7 +18,7 @@ app.post("/ask", async (req, res) => {
 
   try {
     const aiResponse = await askGemini(answer);
-    res.json({ question: aiResponse });
+    res.json(JSON.parse(aiResponse));
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ error: err });

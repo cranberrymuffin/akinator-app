@@ -3,6 +3,7 @@ import { useState } from "react";
 const App = () => {
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("Q: Is the character human?");
+  const [thoughts, setThoughts] = useState("");
 
   const handleSubmit = async () => {
     const response = await fetch("/ask", {
@@ -13,7 +14,9 @@ const App = () => {
 
     if (response.ok) {
       const data = await response.json();
-      setQuestion(data.question);
+      console.log(data);
+      setQuestion(data.answer);
+      setThoughts(data.thoughts);
     } else {
       console.error("Error fetching question");
     }
@@ -32,6 +35,11 @@ const App = () => {
         {/* Question */}
         <div className="question">
           <h3>{question}</h3>
+        </div>
+
+        {/* Thoughts */}
+        <div className="question">
+          <i>{thoughts}</i>
         </div>
 
         {/* Radio options */}
@@ -57,17 +65,37 @@ const App = () => {
           <label>
             <input
               type="radio"
-              value="idk"
-              checked={answer === "idk"}
+              value="I don't know"
+              checked={answer === "I don't know"}
               onChange={(e) => setAnswer(e.target.value)}
             />
             I don't know
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Probably"
+              checked={answer === "Probably"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            Probably
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Probably not"
+              checked={answer === "Probably not"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            Probably not
           </label>
         </div>
 
         {/* Buttons */}
         <div className="buttons">
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit} disabled={!answer}>
+            Submit
+          </button>
           <button onClick={handleReset}>Reset</button>
         </div>
       </div>
