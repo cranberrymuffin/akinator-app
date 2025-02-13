@@ -39,18 +39,16 @@ const App = () => {
 
   return (
     <div className="centered-container">
-      This game is a work in progress...
       <div className="game-box">
+        This game is a work in progress...
         {/* Question */}
         <div className="question">
           <h3>{question}</h3>
         </div>
-
         {/* Thoughts */}
         <div className="question">
           <i>{thoughts}</i>
         </div>
-
         {/* Radio options */}
         <div className="options">
           <label>
@@ -99,7 +97,6 @@ const App = () => {
             Probably not
           </label>
         </div>
-
         {/* Buttons */}
         <div className="buttons">
           <button onClick={handleSubmit} disabled={!answer}>
