@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
+  const [sessionId, setSessionId] = useState("");
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("Q: Is the character human?");
   const [thoughts, setThoughts] = useState("");
+
+  useEffect(() => {
+    const storedSessionId = localStorage.getItem("sessionId") || uuidv4();
+    localStorage.setItem("sessionId", storedSessionId);
+    setSessionId(storedSessionId);
+  }, []);
 
   const handleSubmit = async () => {
     const response = await fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ answer }),
+      body: JSON.stringify({ sessionId, answer }),
     });
 
     if (response.ok) {
