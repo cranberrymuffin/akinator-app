@@ -25,6 +25,17 @@ app.post("/ask", async (req, res) => {
   }
 });
 
+app.post("/reset", (req, res) => {
+  const { sessionId } = req.body;
+
+  if (!sessionId) {
+    return res.status(400).json({ error: "Missing sessionId" });
+  }
+
+  chatSessions.delete(sessionId); // Clear chat history for this session
+  res.json({ message: "Chat history reset successfully." });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });

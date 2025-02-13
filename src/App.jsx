@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
+  const initialQuestion = "Q: Is the character human?";
   const [sessionId, setSessionId] = useState("");
   const [answer, setAnswer] = useState("");
-  const [question, setQuestion] = useState("Q: Is the character human?");
+  const [question, setQuestion] = useState(initialQuestion);
   const [thoughts, setThoughts] = useState("");
 
   useEffect(() => {
@@ -14,6 +15,12 @@ const App = () => {
   }, []);
 
   const handleSubmit = async () => {
+    // If the last AI response was a guess and user says "yes", reset the game instead of fetching
+    if (question.startsWith("G:") && answer === "yes") {
+      handleReset();
+      return;
+    }
+
     const response = await fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,8 +40,12 @@ const App = () => {
   };
 
   const handleReset = async () => {
-    await fetch("/reset", { method: "POST" });
-    setQuestion("Are you thinking of someone?");
+    await fetch("/reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId, answer }),
+    });
+    setQuestion(initialQuestion);
   };
 
   return (
