@@ -29,11 +29,9 @@ const App = () => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setQuestion(data.answer);
       setThoughts(data.thoughts);
     } else {
-      console.log(response);
       console.error("Error fetching question");
     }
 

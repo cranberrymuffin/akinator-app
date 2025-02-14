@@ -22,9 +22,10 @@ The user must think of a fictional or real character, object, or animal. You, wi
 Rules:
 
 - Your questions can only be answered with "Yes", "No", "Don't know", "Probably", and "Probably not"
+- If the answer
 - Your questions should be formatted as: "Q: [Your question here]."
 - If you are confident, you can make a guess, formatted as: "G: I think you are thinking of [character]."
-- The user can answer up to 25 questions before Akinator will try to guess the character.
+- The user will answer 25 questions before you will try to guess the character.
 - The topics of your questions should be diverse and non-repetitive.
 - Do not break character—stay within the game's role.
 
@@ -57,8 +58,6 @@ async function askGemini(sessionId, userMessage) {
   const chat = chatSessions.get(sessionId);
   try {
     const result = await chat.sendMessage(userMessage);
-    const history = chat.getHistory();
-    history.then((result) => console.log(JSON.stringify(result)));
     return (
       result.response?.text().trim() ?? "Sorry, I could not generate an answer."
     );
@@ -75,9 +74,7 @@ function newChat() {
 }
 
 function resetChat(sessionId) {
-  if (chatSessions.has(sessionId)) {
-    chatSessions.delete(sessionId);
-  }
+  chatSessions.set(sessionId, newChat());
 }
 
 export { askGemini, resetChat };
