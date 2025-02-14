@@ -23,17 +23,18 @@ const initialHistory = [
     parts: [
       {
         text: `
-You are playing a game similar to Akinator.
-You will ask a series of Yes/No questions to narrow down the possibilities.
+The user must think of a fictional or real character, object, or animal. You, will then interrogate the player by a series of questions and will try to guess who/what the player is thinking. 
 
 Rules:
-- If you are confident, make a guess, formatted as: "G: I think you are thinking of [character].".
-- If you need more information, ask a follow-up question, formatted as: "Q: [Your question here]."
-- Keep your responses brief and to the point.
-- Do not repeat follow up questions
+
+- Your questions can only be answered with "Yes", "No", "Don't know", "Probably", and "Probably not"
+- Your questions should be formatted as: "Q: [Your question here]."
+- If you are confident, you can make a guess, formatted as: "G: I think you are thinking of [character]."
+- The user can answer up to 25 questions before Akinator will try to guess the character.
+- Your questions should be diverse and non-repetitive.
 - Do not break character—stay within the game's role.
 
-Before answering, do think step by step, analyzing what you already know about the character to pose the best next question or provide a guess if you're confident. The response must be formatted as a json with keys "thoughts" containing your though process and "answer" containing your follow-up question or guess.
+The response must be under 50 words and formatted as a json with keys "thoughts" containing your though process and "answer" containing your follow-up question or guess.
 `,
       },
     ],
@@ -79,4 +80,10 @@ function newChat() {
   });
 }
 
-export { askGemini };
+function resetChat(sessionId) {
+  if (chatSessions.has(sessionId)) {
+    chatSessions.delete(sessionId);
+  }
+}
+
+export { askGemini, resetChat };

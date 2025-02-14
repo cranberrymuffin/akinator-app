@@ -47,6 +47,7 @@ const App = () => {
       body: JSON.stringify({ sessionId, answer }),
     });
     setQuestion(initialQuestion);
+    setThoughts("");
   };
 
   return (

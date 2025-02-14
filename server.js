@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import { askGemini } from "./src/gemini.js";
+import { askGemini, resetChat } from "./src/gemini.js";
 
 const app = express();
 app.use(express.json());
@@ -18,6 +18,7 @@ app.post("/ask", async (req, res) => {
 
   try {
     const aiResponse = await askGemini(sessionId, answer);
+    console.log(aiResponse);
     res.json(JSON.parse(aiResponse));
   } catch (err) {
     console.error("Error:", err);
@@ -27,12 +28,11 @@ app.post("/ask", async (req, res) => {
 
 app.post("/reset", (req, res) => {
   const { sessionId } = req.body;
-
   if (!sessionId) {
     return res.status(400).json({ error: "Missing sessionId" });
   }
 
-  chatSessions.delete(sessionId); // Clear chat history for this session
+  resetChat(sessionId);
   res.json({ message: "Chat history reset successfully." });
 });
 
