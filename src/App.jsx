@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "style.css";
 
 const App = () => {
   const initialQuestion = "Q: Is the character human?";
@@ -63,6 +64,7 @@ const App = () => {
         <div className="options">
           <label>
             <input
+              className="radio"
               type="radio"
               value="yes"
               checked={answer === "yes"}
@@ -72,6 +74,7 @@ const App = () => {
           </label>
           <label>
             <input
+              className="radio"
               type="radio"
               value="no"
               checked={answer === "no"}
@@ -81,6 +84,7 @@ const App = () => {
           </label>
           <label>
             <input
+              className="radio"
               type="radio"
               value="I don't know"
               checked={answer === "I don't know"}
@@ -90,6 +94,7 @@ const App = () => {
           </label>
           <label>
             <input
+              className="radio"
               type="radio"
               value="Probably"
               checked={answer === "Probably"}
@@ -99,6 +104,7 @@ const App = () => {
           </label>
           <label>
             <input
+              className="radio"
               type="radio"
               value="Probably not"
               checked={answer === "Probably not"}
@@ -109,10 +115,12 @@ const App = () => {
         </div>
         {/* Buttons */}
         <div className="buttons">
-          <button onClick={handleSubmit} disabled={!answer}>
+          <button className="button" onClick={handleSubmit} disabled={!answer}>
             Submit
           </button>
-          <button onClick={handleReset}>Reset</button>
+          <button className="button" onClick={handleReset}>
+            Reset
+          </button>
         </div>
       </div>
     </div>

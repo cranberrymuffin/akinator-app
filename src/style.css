@@ -6,7 +6,13 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
+  color: palevioletred;
   overflow: hidden;
+  font-family: "Medodica";
+}
+
+.input[type="radio"] {
+  accent-color: palevioletred;
 }
 
 .centered-container {
@@ -15,15 +21,15 @@ body,
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: #f0f0f0;
+  background-color: pink;
 }
 
 .game-box {
   text-align: center;
-  background: white;
+  background: pink;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px palevioletred;
   max-width: 400px;
   width: 90%;
 }
@@ -46,4 +52,19 @@ body,
 .buttons {
   display: flex;
   justify-content: space-around;
+}
+
+@font-face {
+  font-family: "Medodica";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./medodica/MedodicaRegular.otf");
+}
+
+.button {
+  background-color: pink;
+  border: 1px solid palevioletred;
+  border-radius: 3px;
+  font-family: "Medodica";
+  color: palevioletred;
 }
