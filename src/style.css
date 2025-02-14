@@ -21,7 +21,7 @@ body,
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: pink;
+  background-color: palevioletred;
 }
 
 .game-box {
@@ -29,7 +29,7 @@ body,
   background: pink;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px palevioletred;
+  box-shadow: 4px 4px 4px 4px pink;
   max-width: 400px;
   width: 90%;
 }
@@ -67,4 +67,26 @@ body,
   border-radius: 3px;
   font-family: "Medodica";
   color: palevioletred;
+}
+
+input[type="radio"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1px solid palevioletred;
+  background-color: pink;
+  border-radius: 50%;
+}
+
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  background-color: palevioletred;
 }
