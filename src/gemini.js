@@ -11,7 +11,7 @@ const client = new GoogleGenerativeAI(apiKey);
 const model = client.getGenerativeModel({
   model: "gemini-pro",
 });
-const initialHistory = [
+const initialHistory = () => [
   {
     role: "user",
     parts: [
@@ -56,6 +56,7 @@ async function askGemini(sessionId, userMessage) {
     chatSessions.set(sessionId, newChat());
   }
   const chat = chatSessions.get(sessionId);
+
   try {
     const result = await chat.sendMessage(userMessage);
     return (
@@ -69,7 +70,7 @@ async function askGemini(sessionId, userMessage) {
 
 function newChat() {
   return model.startChat({
-    history: initialHistory,
+    history: initialHistory(),
   });
 }
 

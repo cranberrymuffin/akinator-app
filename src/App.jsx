@@ -12,6 +12,7 @@ const App = () => {
     const storedSessionId = localStorage.getItem("sessionId") || uuidv4();
     localStorage.setItem("sessionId", storedSessionId);
     setSessionId(storedSessionId);
+    console.log(storedSessionId);
   }, []);
 
   const handleSubmit = async () => {
