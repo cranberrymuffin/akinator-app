@@ -29,7 +29,7 @@ body,
   background: pink;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 4px 4px 4px 4px pink;
+  box-shadow: 10px 10px 10px 10px pink, 10px 10px 10px 10px pink;
   max-width: 400px;
   width: 90%;
 }
