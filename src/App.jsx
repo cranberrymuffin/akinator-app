@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "style.css";
 
 const App = () => {
   const initialQuestion = "Q: Is the character human?";
