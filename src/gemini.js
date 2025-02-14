@@ -10,12 +10,6 @@ if (!apiKey) {
 const client = new GoogleGenerativeAI(apiKey);
 const model = client.getGenerativeModel({
   model: "gemini-pro",
-  generationConfig: {
-    temperature: 1.5, // Higher diversity
-    maxOutputTokens: 100, // Keeps responses concise
-    topP: 0.8, // More randomness
-    topK: 50, // Selects from a wider set of possibilities
-  },
 });
 const initialHistory = [
   {
