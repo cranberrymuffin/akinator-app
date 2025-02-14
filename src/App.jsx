@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const initialQuestion = "Q: Is the character human?";
@@ -9,8 +8,7 @@ const App = () => {
   const [thoughts, setThoughts] = useState("");
 
   useEffect(() => {
-    const storedSessionId = localStorage.getItem("sessionId") || uuidv4();
-    localStorage.setItem("sessionId", storedSessionId);
+    const storedSessionId = "id" + Math.random().toString(16).slice(2);
     setSessionId(storedSessionId);
     console.log(storedSessionId);
   }, []);
