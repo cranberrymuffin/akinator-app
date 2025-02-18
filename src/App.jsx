@@ -114,11 +114,11 @@ const App = () => {
         </div>
         {/* Buttons */}
         <div className="buttons">
-          <button className="button" onClick={handleSubmit} disabled={!answer}>
-            Submit
-          </button>
           <button className="button" onClick={handleReset}>
             Reset
+          </button>
+          <button className="button" onClick={handleSubmit} disabled={!answer}>
+            Submit
           </button>
         </div>
       </div>
