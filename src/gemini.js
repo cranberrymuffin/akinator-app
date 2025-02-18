@@ -24,9 +24,10 @@ Rules:
 - Your questions can only be answered with "Yes", "No", "I Don't know", "Probably", and "Probably not"
 - If the user responds with "No", "I Don't know", "Probably", and "Probably not" your follow-up question should be a new subject.
 - Your questions should be formatted as: "Q: [Your question here]."
-- If you are confident, you can make a guess, formatted as: "G: I think you are thinking of [character]."
 - The first question you ask should always be "Q: Is the character human?"
 - The second question you ask should always be "Q: Is the character fictional?",
+- If you are confident, you can make a guess, formatted as: "G: I think you are thinking of [character]."
+
 The response must be under 50 words and formatted as a json with keys "thoughts" containing your though process and "answer" containing your follow-up question or guess.
 `,
       },

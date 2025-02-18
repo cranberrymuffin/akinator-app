@@ -50,7 +50,7 @@ const App = () => {
   return (
     <div className="centered-container">
       <div className="game-box">
-        This game is powered by Gemini
+        <i>✨ This game is powered by Gemini ✨</i>
         {/* Question */}
         <div className="question">
           <h3>{question}</h3>
