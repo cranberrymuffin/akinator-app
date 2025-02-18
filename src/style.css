@@ -11,10 +11,6 @@ body,
   font-family: "Medodica";
 }
 
-.input[type="radio"] {
-  accent-color: palevioletred;
-}
-
 .centered-container {
   display: flex;
   align-items: center;
@@ -84,6 +80,10 @@ input[type="radio"] {
   border: 1px solid palevioletred;
   background-color: pink;
   border-radius: 50%;
+
+  accent-color: palevioletred;
+  margin-top: -1px;
+  vertical-align: middle;
 }
 
 /* appearance for checked radiobutton */
