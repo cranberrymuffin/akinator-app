@@ -9,9 +9,9 @@ This project combines a powerful backend, a smooth front end, and AI to create a
 - The React app is bundled into production-ready static files using `npm run build`, and served through an **Express** backend. The backend handles communication with the Gemini AI API to send user input and retrieve AI-generated responses.
 - The static React files are served via `node server.js`.
 
-You can view the **React app's main component** [here](https://github.com/username/repo-name/blob/main/src/App.jsx).
+You can view the **React app's main component** [here](https://github.com/cranberrymuffin/akinator-app/blob/main/src/App.jsx).
 
-The **server code** that handles routing and communication with the Gemini AI API can be found [here](https://github.com/username/repo-name/blob/main/server.js).
+The **server code** that handles routing and communication with the Gemini AI API can be found [here](https://github.com/cranberrymuffin/akinator-app/blob/main/server.js).
 
 ### 2. **Disco Hosting**
 - The app is deployed using **Disco**, a platform for hosting full-stack applications, ensuring a scalable, fast, and reliable environment.
@@ -19,7 +19,7 @@ The **server code** that handles routing and communication with the Gemini AI AP
   - The Dockerfile automates building the front end with `npm run build` and serving the static files via Express using `node server.js`.
   - The app is hosted on Disco for a seamless full-stack deployment.
 
-You can check out the **Dockerfile** [here](https://github.com/username/repo-name/blob/main/Dockerfile).
+You can check out the **Dockerfile** [here](https://github.com/cranberrymuffin/akinator-app/blob/main/Dockerfile).
 
 ### 3. **Gemini AI Chat Conversation API**
 - The **Gemini API** by Google powers the AI's ability to ask intelligent yes/no questions and process the user's answers dynamically.
