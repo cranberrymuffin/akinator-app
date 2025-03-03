@@ -9,7 +9,7 @@ if (!apiKey) {
 }
 const client = new GoogleGenerativeAI(apiKey);
 const model = client.getGenerativeModel({
-  model: "gemini-pro",
+  model: "gemini-1.5-pro",
 });
 const initialHistory = () => [
   {
