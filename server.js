@@ -18,10 +18,37 @@ app.post("/ask", async (req, res) => {
 
   try {
     const aiResponse = await askGemini(sessionId, answer);
-    res.json(JSON.parse(aiResponse));
+
+    // Clean up the response and parse JSON safely
+    let cleanResponse = aiResponse.trim();
+
+    // Remove markdown formatting if present
+    if (cleanResponse.startsWith("```json")) {
+      cleanResponse = cleanResponse
+        .replace(/```json\s*/, "")
+        .replace(/\s*```$/, "");
+    }
+
+    // Additional cleanup for any stray markdown
+    cleanResponse = cleanResponse.replace(/^```\s*/, "").replace(/\s*```$/, "");
+
+    try {
+      const parsedResponse = JSON.parse(cleanResponse);
+      res.json(parsedResponse);
+    } catch (parseError) {
+      console.error("JSON parse error:", parseError);
+      console.error("Raw response:", aiResponse);
+      console.error("Cleaned response:", cleanResponse);
+
+      // Fallback response if JSON parsing fails
+      res.json({
+        thoughts: "I'm having trouble processing the response format.",
+        answer: "Q: Is the character human?",
+      });
+    }
   } catch (err) {
     console.error("Error:", err);
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err.message || "Internal server error" });
   }
 });
 

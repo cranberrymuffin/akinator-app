@@ -10,7 +10,6 @@ const App = () => {
   useEffect(() => {
     const storedSessionId = "id" + Math.random().toString(16).slice(2);
     setSessionId(storedSessionId);
-    console.log(storedSessionId);
   }, []);
 
   const handleSubmit = async () => {
