@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon server.js",
+    "start:local": "NODE_OPTIONS=--openssl-legacy-provider npm run build && node server.js",
     "dev": "nodemon server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",

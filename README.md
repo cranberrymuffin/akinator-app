@@ -43,10 +43,17 @@ To get started with this project locally, follow these steps:
    npm install
    ```
 
-3. Run the project:
+3. Create a `.env` file in the project root:
    ```bash
-   npm run build && node server.js
+   GEMINI_API_KEY=your_api_key_here
    ```
+
+4. Run the project:
+   ```bash
+   npm run start:local
+   ```
+
+   If you're using a newer Node.js version, this avoids the OpenSSL compatibility error (`error:0308010C:digital envelope routines::unsupported`) from `react-scripts`.
 
 This will start the local development server and open the app in your browser.
 

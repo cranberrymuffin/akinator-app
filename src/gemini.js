@@ -4,10 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const apiKey = process.env.GEMINI_API_KEY;
-if (!apiKey) {
-  throw new Error("Gemini API key is missing from environment variables");
-}
-const client = new GoogleGenerativeAI(apiKey);
+const client = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 // Cache for the latest free model
 let cachedFreeModel = null;
@@ -41,17 +38,17 @@ async function getLatestFreeModel() {
     // Filter for free-tier friendly Gemini models
     const freeGeminiModels = data.models.filter(
       (model) =>
-        model.name.includes("gemini") &&
-        model.supportedGenerationMethods.includes("generateContent") &&
-        !model.name.includes("preview") &&
-        !model.name.includes("exp") &&
-        !model.name.includes("embedding") &&
-        !model.name.includes("imagen") &&
-        !model.name.includes("veo") &&
-        !model.name.includes("live") &&
-        !model.name.includes("tts") &&
-        !model.name.includes("audio") &&
-        !model.name.includes("pro") // Avoid Pro models which have stricter limits
+        (model.name || "").includes("gemini") &&
+        (model.supportedGenerationMethods || []).includes("generateContent") &&
+        !(model.name || "").includes("preview") &&
+        !(model.name || "").includes("exp") &&
+        !(model.name || "").includes("embedding") &&
+        !(model.name || "").includes("imagen") &&
+        !(model.name || "").includes("veo") &&
+        !(model.name || "").includes("live") &&
+        !(model.name || "").includes("tts") &&
+        !(model.name || "").includes("audio") &&
+        !(model.name || "").includes("pro") // Avoid Pro models which have stricter limits
     );
 
     // Sort by version to get the latest Flash model (better for free tier)
@@ -66,12 +63,13 @@ async function getLatestFreeModel() {
 
     // Prefer Flash models for free tier usage
     const latestFlash = freeGeminiModels.find((m) =>
-      m.baseModelId.includes("flash")
+      (m.baseModelId || m.name || "").includes("flash")
     );
     const latestModel = latestFlash || freeGeminiModels[0];
 
     if (latestModel) {
-      cachedFreeModel = latestModel.baseModelId;
+      cachedFreeModel =
+        latestModel.baseModelId || (latestModel.name || "").replace(/^models\//, "");
       modelCacheTime = Date.now();
       console.log(`Found latest free model: ${cachedFreeModel}`);
       return cachedFreeModel;
@@ -84,7 +82,7 @@ async function getLatestFreeModel() {
       error.message
     );
     // Fallback to known free model
-    cachedFreeModel = "gemini-1.5-flash";
+    cachedFreeModel = "gemini-2.0-flash";
     modelCacheTime = Date.now();
     return cachedFreeModel;
   }
@@ -144,6 +142,14 @@ function clearStaleSessions() {
 setInterval(clearStaleSessions, 5 * 60 * 1000); // Check every 5 minutes
 
 async function askGemini(sessionId, userMessage) {
+  if (!client) {
+    return JSON.stringify({
+      thoughts:
+        "Gemini API key is missing. Add GEMINI_API_KEY to your environment to enable AI responses.",
+      answer: "Q: Is the character human?",
+    });
+  }
+
   if (!chatSessions.has(sessionId)) {
     chatSessions.set(sessionId, await newChat());
   }
@@ -196,11 +202,15 @@ async function askGemini(sessionId, userMessage) {
       }
     }
     console.error("Error calling Gemini API:", err);
-    throw new Error("Error communicating with Gemini");
+    throw new Error(err?.message || "Error communicating with Gemini");
   }
 }
 
 async function newChat() {
+  if (!client) {
+    throw new Error("Gemini API key is missing from environment variables");
+  }
+
   // Get the latest free model for each new chat
   const modelName = await getLatestFreeModel();
 
