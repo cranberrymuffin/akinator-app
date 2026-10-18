@@ -20,12 +20,22 @@ body,
   background-color: palevioletred;
 }
 
+.game-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
 .game-box {
   text-align: center;
   background: pink;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 10px 10px 10px 10px pink, 10px 10px 10px 10px pink;
+  box-shadow:
+    8px 2px 8px 2px pink,
+    16px 4px 16px 4px pink;
   max-width: 400px;
   width: 90%;
 }
@@ -48,6 +58,35 @@ body,
 .buttons {
   display: flex;
   justify-content: space-around;
+  min-height: 24px;
+}
+
+.loading-indicator {
+  color: palevioletred;
+}
+
+.loading-dot {
+  animation: loadingDot 1.2s infinite;
+  opacity: 0;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingDot {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  40%,
+  100% {
+    opacity: 1;
+  }
 }
 
 @font-face {
@@ -63,6 +102,19 @@ body,
   border-radius: 3px;
   font-family: "Medodica";
   color: palevioletred;
+}
+
+.reset-button {
+  min-width: 96px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 45px;
+  box-shadow:
+    0 0 8px 2px pink,
+    0 0 16px 4px pink;
+  border: none;
 }
 
 input[type="radio"] {
