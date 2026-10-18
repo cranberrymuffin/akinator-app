@@ -70,63 +70,66 @@ const App = () => {
           <div className="question">
             <i>{thoughts}</i>
           </div>
-          {/* Radio options */}
+          {/* Answer options */}
           <div className="options">
-            <label>
-              <input
-                className="radio"
-                type="radio"
-                value="yes"
-                checked={answer === "yes"}
-                disabled={isSubmitting}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              Yes
-            </label>
-            <label>
-              <input
-                className="radio"
-                type="radio"
-                value="no"
-                checked={answer === "no"}
-                disabled={isSubmitting}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              No
-            </label>
-            <label>
-              <input
-                className="radio"
-                type="radio"
-                value="I don't know"
-                checked={answer === "I don't know"}
-                disabled={isSubmitting}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              I don't know
-            </label>
-            <label>
-              <input
-                className="radio"
-                type="radio"
-                value="Probably"
-                checked={answer === "Probably"}
-                disabled={isSubmitting}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              Probably
-            </label>
-            <label>
-              <input
-                className="radio"
-                type="radio"
-                value="Probably not"
-                checked={answer === "Probably not"}
-                disabled={isSubmitting}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              Probably not
-            </label>
+            {isSubmitting ? (
+              <span className="thinking-brain" role="img" aria-label="Thinking">
+                🧠
+              </span>
+            ) : (
+              <>
+                <label>
+                  <input
+                    className="radio"
+                    type="radio"
+                    value="yes"
+                    checked={answer === "yes"}
+                    onChange={(e) => setAnswer(e.target.value)}
+                  />
+                  Yes
+                </label>
+                <label>
+                  <input
+                    className="radio"
+                    type="radio"
+                    value="no"
+                    checked={answer === "no"}
+                    onChange={(e) => setAnswer(e.target.value)}
+                  />
+                  No
+                </label>
+                <label>
+                  <input
+                    className="radio"
+                    type="radio"
+                    value="I don't know"
+                    checked={answer === "I don't know"}
+                    onChange={(e) => setAnswer(e.target.value)}
+                  />
+                  I don't know
+                </label>
+                <label>
+                  <input
+                    className="radio"
+                    type="radio"
+                    value="Probably"
+                    checked={answer === "Probably"}
+                    onChange={(e) => setAnswer(e.target.value)}
+                  />
+                  Probably
+                </label>
+                <label>
+                  <input
+                    className="radio"
+                    type="radio"
+                    value="Probably not"
+                    checked={answer === "Probably not"}
+                    onChange={(e) => setAnswer(e.target.value)}
+                  />
+                  Probably not
+                </label>
+              </>
+            )}
           </div>
           {/* Buttons */}
           <div className="buttons">
@@ -145,9 +148,11 @@ const App = () => {
             )}
           </div>
         </div>
-        <button className="button reset-button" onClick={handleReset}>
-          Reset
-        </button>
+        {!isSubmitting && (
+          <button className="button reset-button" onClick={handleReset}>
+            Reset
+          </button>
+        )}
       </div>
     </div>
   );

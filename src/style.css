@@ -55,6 +55,31 @@ body,
   margin-bottom: 20px;
 }
 
+.thinking-brain {
+  font-size: 3rem;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  background-clip: content-box;
+  border: 1px solid palevioletred;
+  background-color: pink;
+  border-radius: 50%;
+  accent-color: palevioletred;
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
+input[type="radio"]:checked {
+  background-color: palevioletred;
+}
+
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -115,30 +140,4 @@ body,
     0 0 8px 2px pink,
     0 0 16px 4px pink;
   border: none;
-}
-
-input[type="radio"] {
-  /* remove standard background appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* create custom radiobutton appearance */
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  padding: 1px;
-  /* background-color only for content */
-  background-clip: content-box;
-  border: 1px solid palevioletred;
-  background-color: pink;
-  border-radius: 50%;
-
-  accent-color: palevioletred;
-  margin-top: -1px;
-  vertical-align: middle;
-}
-
-/* appearance for checked radiobutton */
-input[type="radio"]:checked {
-  background-color: palevioletred;
 }
